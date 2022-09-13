@@ -20,12 +20,11 @@ const showProducts = (products) => {
 
    const allProducts = products.slice(0, 10).map((pd) => pd);
    for (const product of allProducts) {
-      const image = product.images;
       const div = document.createElement('div');
       div.classList.add('product');
       div.innerHTML = `<div class="single-product">
       <div>
-    <img class="product-image" src=${image}></img>
+    <img class="product-image" src=${product.image}></img>
       </div>
       <h3>${product.title}</h3>
       <p>Category: ${product.category}</p>
@@ -51,7 +50,6 @@ const addToCart = (id, price) => {
 };
 
 const showProductDetails = (product_id) => {
-   console.log(product_id);
    fetch(`https://fakestoreapi.com/products/${product_id}`)
       .then((res) => res.json())
       .then((data) => showProductDetailsInModal(data));
@@ -60,7 +58,7 @@ const showProductDetails = (product_id) => {
 const showProductDetailsInModal = (product_details) => {
    console.log(product_details);
    setInnerText('exampleModalLabel', product_details.title);
-   setInnerText('product_id', product_details.id);
+   setInnerText('productId', product_details.id);
    setInnerText('modal_body', product_details.description);
    setInnerText('rating', product_details.rating.rate);
 };
@@ -81,7 +79,7 @@ const updatePrice = (id, value) => {
 
 // set innerText function
 const setInnerText = (id, value) => {
-   document.getElementById(id).innerText = Math.round(value);
+   document.getElementById(id).innerText = value;
 };
 
 // update delivery charge and total Tax
